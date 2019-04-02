@@ -7,7 +7,8 @@ Sistema de Gestão de Projetos Financiados. API responsável por fornecer recurs
 para a construção do sistema web SGPF. 
 
 # Group Cadastros Básicos
-## Programas de Financiamento [/programa-financiamento]
+
+## Programas de Financiamento [/programa-financiamentos]
 
 ### Criar Programa Financiamento [POST]
 
@@ -33,7 +34,7 @@ para a construção do sistema web SGPF.
 + Response 404 (application/json)
     + Attributes (DefaultErrorResponse)
 
-## Programa Financiamento [/programa-financiamento/{id_programa_financiamento}]
+## Programa Financiamento [/programa-financiamentos/{id_programa_financiamento}]
 
 + Parameters
     + id_programa_financiamento: 1 (number, required) - ID do Programa Financiamento
@@ -52,8 +53,7 @@ para a construção do sistema web SGPF.
 ### Excluir Programa Financiamento [DELETE]
 
 + Response 200 (application/json)
-    + Attributes (object)
-    	+ id: 1 (number) - ID do Programa financiamento removido
+    + Attributes (DefaultSuccessfulResponse)
 
 + Response 404 (application/json)
     + Attributes (DefaultErrorResponse)
@@ -74,7 +74,79 @@ para a construção do sistema web SGPF.
 + Response 400 (application/json)
     + Attributes (DefaultErrorResponse)
 
+## Categorias [/categorias]
+
+### Criar Categoria [POST]
+
++ Request Criar nova categoria
+
+    + Headers
+
+            Accept: text/plain
+        	Content-Type: application/json
+    + Attributes (Categoria)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
+### Listar Categorias [GET]
+
++ Response 200 (application/json)
+	+ Attributes (object)
+        + data (array[Categoria]) - Array de Categorias
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+## Categoria [/categorias/{id_categoria}]
+
++ Parameters
+    + id_categoria: 1 (number, required) - ID da Categoria
+
+### Ver Categoria [GET]
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (array[Categoria]) - Categoria Object
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Excluir Categoria [DELETE]
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Alterar Categoria [PUT]
+
++ Request Alterar uma categoria
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (Categoria)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
++ Response 400 (application/json)
+    + Attributes (DefaultErrorResponse)
+
 # Data Structures
+
+## Categoria (object)
++ nome (string) - Nome da Categoria
++ sigla (string) - Sigla da Categoria
++ id_programa_financiamento (number) - Relacionamento chave estrangeira Programa Financiamento
++ programa_financiamento (ProgramaFinanciamento) - Objeto mapeado Programa Financiamento
 
 ## ProgramaFinanciamento (object)
 + numero_contrato (string) - Número do Contrato
