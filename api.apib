@@ -140,7 +140,82 @@ para a construção do sistema web SGPF.
 + Response 400 (application/json)
     + Attributes (DefaultErrorResponse)
 
+## Componentes [/componentes]
+
+### Criar Componente [POST]
+
++ Request Criar novo componente
+
+    + Headers
+
+            Accept: text/plain
+        	Content-Type: application/json
+    + Attributes (Componente)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
+### Listar Componentes [GET]
+
++ Response 200 (application/json)
+	+ Attributes (object)
+        + data (array[Componente]) - Array de Componentes
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+## Componente [/componentes/{id_componente}]
+
++ Parameters
+    + id_componente: 1 (number, required) - ID do Componente
+
+### Ver Componente [GET]
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (array[Componente]) - Componente Object
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Excluir Componente [DELETE]
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Alterar Componente [PUT]
+
++ Request Alterar um componente
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (Componente)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
++ Response 400 (application/json)
+    + Attributes (DefaultErrorResponse)
+
 # Data Structures
+
+## Componente (object)
++ nome (string) - Nome do Componente
++ numero (number) - Numero do Componente
++ lider (string) - Nome do Líder
++ programa_trabalho (string) - Nome do Programa de trabalho
++ id_categoria (number) - Relacionamento chave estrangeira Categoria
++ categoria (Categoria) - Objeto mapeado Categoria
+
 
 ## Categoria (object)
 + nome (string) - Nome da Categoria
