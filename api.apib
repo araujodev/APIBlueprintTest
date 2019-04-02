@@ -1,0 +1,110 @@
+FORMAT: 1A
+HOST: http://localhost:8000/v1
+
+# SGPF (Profisco)
+
+Sistema de Gestão de Projetos Financiados. API responsável por fornecer recursos/dados
+para a construção do sistema web SGPF. 
+
+# Group Cadastros Básicos
+## Programas de Financiamento [/programa-financiamento]
+
+### Criar Programa Financiamento [POST]
+
++ Request Criar novo programa financiamento
+
+    + Headers
+
+            Accept: text/plain
+        	Content-Type: application/json
+    + Attributes (ProgramaFinanciamento)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
+### Listar Programas Financiamento [GET]
+
++ Response 200 (application/json)
+	+ Attributes (object)
+        + data (array[ProgramaFinanciamento]) - Array dos Programas Financiamento
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+## Programa Financiamento [/programa-financiamento/{id_programa_financiamento}]
+
++ Parameters
+    + id_programa_financiamento: 1 (number, required) - ID do Programa Financiamento
+
+### Ver Programa Financiamento [GET]
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (array[ProgramaFinanciamento]) - Programas Financiamento
+        + links (DefaultLinks) - Links para auxilio API.
+        + meta (DefaultMetas) - Metadados
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Excluir Programa Financiamento [DELETE]
+
++ Response 200 (application/json)
+    + Attributes (object)
+    	+ id: 1 (number) - ID do Programa financiamento removido
+
++ Response 404 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+### Alterar Programa Financiamento [PUT]
+
++ Request Alterar um programa financiamento
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (ProgramaFinanciamento)
+
++ Response 200 (application/json)
+    + Attributes (DefaultSuccessfulResponse)
+
++ Response 400 (application/json)
+    + Attributes (DefaultErrorResponse)
+
+# Data Structures
+
+## ProgramaFinanciamento (object)
++ numero_contrato (string) - Número do Contrato
++ data_assintura (string) - Data da Assintura do Contrato
++ nome (string) - Nome do Programa Financiamento
++ descricao (string) - Texto Descritivo do Programa Financiamento
++ orgao_financiador (string) - Nome/Descrição do órgão financiador
+
+## DefaultLinks (object)
++ first (string) - First
++ last (number) - Last
++ prev (string) - Prev
++ next (string) - Next
+
+## DefaultMetas (object)
++ current_page (number) - Current Page
++ from (number) - From 
++ last_page (number) - Last Page
++ path (string) - Path
++ per_page (number) - Per Page
++ to (number) - To
++ total (number) - Total
+
+## DefaultSuccessfulResponse (object)
++ id (number) - Id gerado
++ status_code: 200 (number) - Código Http do Response
++ mensagem (string) - Mensagem de retorno
+
+## DefaultErrorResponse (object)
++ status_code: 400 (number) - Status code
++ mensagem (string) - Mensagem do status
++ descricao (string) - Descrição do status
++ code: 2 (number) - Sub código.
